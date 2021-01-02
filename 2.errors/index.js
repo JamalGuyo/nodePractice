@@ -1,6 +1,16 @@
 const express = require('express'),
 app = express();
 const AppError = require('./AppError');
+const mongoose = require('mongoose')
+// connect to db
+mongoose.connect('mongodb://localhost:27017/demodb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+})
+.then(() => console.log('connection to db successful'))
+.catch(e => console.log(e))
 // routes
 app.get('/', (req, res) => {
     res.send('home page')
