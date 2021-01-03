@@ -1,17 +1,22 @@
 const express = require('express'),
 router = express.Router();
+//
+const Farm = require('../models/farm');
 // farm routes
 // create and read
-router.get('/', (req, res) => {
-    res.send('get all farms from db')
+router.get('/', async(req, res) => {
+    const farms = await Farm.find();
+    res.render('farms/index', {farms})
 })
 
 router.get('/new', (req, res) => {
-    res.send('show form to add new farm')
+    res.render('farms/new')
 })
 
-router.post('/', (req, res) => {
-    res.send('handle logic of adding new farm');
+router.post('/', async(req, res) => {
+   const {farm} = req.body;
+   await Farm.create(farm); 
+   res.redirect('/farms')
 })
 // show specific farm
 router.get('/:id', (req, res) => {
