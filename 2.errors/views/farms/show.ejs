@@ -1,0 +1,10 @@
+<div>
+    <h1><%= farm.name%></h1>
+    <p><%= farm.location%></p>
+    <div>
+        <a href="/farms/<%=farm._id%>/edit">Edit Farm</a>
+        <form action="/farms/<%=farm._id%>?_method=DELETE" method="POST">
+            <button>DELETE FARM</button>
+        </form>
+    </div>
+</div>

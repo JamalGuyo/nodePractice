@@ -2,7 +2,8 @@ const express = require('express'),
 app = express(),
  AppError = require('./utils/AppError'),
  mongoose = require('mongoose'),
- path = require('path');
+ path = require('path'),
+ methodOverride = require('method-override');
 // routes
 const farmRoutes = require('./routes/farm');
 // connect to db
@@ -23,6 +24,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
 // 3rd party middleware to handle req.body
 app.use(express.urlencoded({extended: true}));
+// configure methodOverride to edit and delete 
+app.use(methodOverride('_method'))
 // =================================================================================
 // routes
 app.get('/', (req, res) => {

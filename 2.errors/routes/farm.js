@@ -19,19 +19,23 @@ router.post('/', async(req, res) => {
    res.redirect('/farms')
 })
 // show specific farm
-router.get('/:id', (req, res) => {
-    res.send('show a single farm')
+router.get('/:id', async(req, res) => {
+    const farm = await Farm.findById(req.params.id);
+    res.render('farms/show', {farm})
 })
 // update
-router.get('/:id/edit', (req, res) => {
-    res.send('show edit for for one specific famr');
+router.get('/:id/edit', async(req, res) => {
+    const farm = await Farm.findById(req.params.id);
+    res.render('farms/edit', {farm})
 })
-router.put('/:id', (req, res) => {
-    res.send('handle logic for editing a farm');
+router.put('/:id', async(req, res) => {
+    await Farm.findByIdAndUpdate(req.params.id, req.body.farm);
+    res.redirect(`/farms/${req.params.id}`)
 })
 // delete
-router.delete('/:id', (req, res) => {
-    res.send('delete a single farm')
+router.delete('/:id', async(req, res) => {
+    await Farm.findByIdAndDelete(req.params.id);
+    res.redirect('/farms')
 })
 // export farm router
 module.exports = router;
