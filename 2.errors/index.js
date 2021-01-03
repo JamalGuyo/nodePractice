@@ -1,7 +1,9 @@
 const express = require('express'),
 app = express();
-const AppError = require('./AppError');
+const AppError = require('./utils/AppError');
 const mongoose = require('mongoose')
+// routes
+const farmRoutes = require('./routes/farm');
 // connect to db
 mongoose.connect('mongodb://localhost:27017/demodb', {
     useNewUrlParser: true,
@@ -15,6 +17,9 @@ mongoose.connect('mongodb://localhost:27017/demodb', {
 app.get('/', (req, res) => {
     res.send('home page')
 })
+// imported routes
+app.use('/farms/', farmRoutes);
+// 
 app.get('/error', (req,res) => {
    try{
        chicken.fly();
