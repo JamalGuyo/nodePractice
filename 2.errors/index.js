@@ -1,5 +1,5 @@
 const express = require('express'),
-app = express(),
+ app = express(),
  AppError = require('./utils/AppError'),
  mongoose = require('mongoose'),
  path = require('path'),
@@ -36,10 +36,15 @@ app.get('/', (req, res) => {
 })
 // imported routes
 app.use('/farms/', farmRoutes);
+// 404 route
+app.all('*', (req, res) => {
+    throw new AppError('Page Not Found', 404);
+})
 // error handling middleware
 app.use((err,req,res,next) => {
-    const {status = 500, message ="something went wrong"} = err;
-    res.status(status).send(message);
+    const {status = 500} = err;
+    if(!err.message) err.message ="something went wrong";
+    res.status(status).render('error', {err});
 })
 // create listener
 const PORT = process.env.PORT || 8080;
