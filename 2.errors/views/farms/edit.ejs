@@ -1,12 +1,19 @@
 <% layout('layouts/boilerplate') %>
-<form action="/farms/<%=farm._id%>?_method=PUT" method="POST">
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="farm[name]" value="<%=farm.name%>"/>
+<div class="card">
+    <div class="card-header">
+        <h1 class="display-6 text-center">edit <%= farm.name%></h1>
     </div>
-     <div>
-        <label for="location">Location</label>
-        <input type="text" id="location" name="farm[location]" value="<%=farm.location%>"/>
+    <div class="card-body">
+        <form action="/farms/<%=farm._id%>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input class="form-control" type="text" id="name" name="farm[name]" value="<%=farm.name%>"/>
+            </div>
+            <div class="form-group">
+                <label for="location" class="form-label">Location</label>
+                <input class="form-control" type="text" id="location" name="farm[location]" value="<%=farm.location%>"/>
+            </div>
+            <button class="btn btn-primary mt-2">update farm</button>
+        </form>
     </div>
-    <button>update farm</button>
-</form>
+</div>
