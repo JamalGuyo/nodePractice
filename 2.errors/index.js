@@ -3,7 +3,8 @@ app = express(),
  AppError = require('./utils/AppError'),
  mongoose = require('mongoose'),
  path = require('path'),
- methodOverride = require('method-override');
+ methodOverride = require('method-override'),
+ ejsMate = require('ejs-mate');
 // routes
 const farmRoutes = require('./routes/farm');
 // connect to db
@@ -17,6 +18,8 @@ mongoose.connect('mongodb://localhost:27017/demodb', {
 .catch(e => console.log(e))
 // ================================================================================
 // CONFIGURATIONS
+// configure ejsmate
+app.engine('ejs', ejsMate);
 // configure ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -29,7 +32,7 @@ app.use(methodOverride('_method'))
 // =================================================================================
 // routes
 app.get('/', (req, res) => {
-    res.send('home page')
+    res.render('index')
 })
 // imported routes
 app.use('/farms/', farmRoutes);
