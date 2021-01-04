@@ -7,6 +7,7 @@ const express = require('express'),
  ejsMate = require('ejs-mate');
 // routes
 const farmRoutes = require('./routes/farm');
+const productRoutes = require('./routes/product');
 // connect to db
 mongoose.connect('mongodb://localhost:27017/demodb', {
     useNewUrlParser: true,
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 })
 // imported routes
 app.use('/farms/', farmRoutes);
+app.use('/products', productRoutes)
 // 404 route
 app.all('*', (req, res) => {
     throw new AppError('Page Not Found', 404);
