@@ -5,7 +5,9 @@
             <div class="card-body">
                 <ul class="list-group">
                     <% for(farm of farms){ %>
-                        <li class="list-group-item"><a href="farms/<%=farm._id%>"><%= farm.name%></a></li>
+                        <li class="list-group-item"><a href="farms/<%=farm._id%>"><%= farm.name%></a>
+                            <span class="badge bg-primary rounded-pill"><%=farm.products.length%></span>
+                        </li>
                         <%}%>
                     </ul>
             </div>
