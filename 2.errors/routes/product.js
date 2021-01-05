@@ -50,8 +50,10 @@ router.put('/:productId', validateProduct, catchAsync(async(req, res) => {
     res.redirect(`/farms/${req.params.id}/`)
 }))
 // delete
-router.delete('/:productId', (req, res) => {
-    res.send('handle delete logic here')
-})
+router.delete('/:productId', catchAsync(async(req, res) => {
+    await Farm.findByIdAndUpdate(req.params.id, {$pull: {products: req.params.productId}});
+    await Product.findByIdAndDelete(req.params.productId);
+    res.redirect(`/farms/${req.params.id}`)
+}))
 // export router
 module.exports = router;
