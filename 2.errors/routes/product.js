@@ -11,18 +11,18 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
     res.send('handle adding new product here')
 })
-router.get('/:id', (req, res) => {
+router.get('/:productId', (req, res) => {
     res.send('show one product')
 })
 // update
-router.get('/:id/edit', (req, res) => {
+router.get('/:productId/edit', (req, res) => {
     res.send('show edit form')
 })
-router.put('/:id', (req, res) => {
+router.put('/:productId', (req, res) => {
     res.send('update logic will be handled here')
 })
 // delete
-router.delete('/:id', (req, res) => {
+router.delete('/:productId', (req, res) => {
     res.send('handle delete logic here')
 })
 // export router
