@@ -34,7 +34,7 @@ router.post('/',validateFarm, catchAsync(async(req, res) => {
 }))
 // show specific farm
 router.get('/:id', catchAsync(async(req, res) => {
-    const farm = await Farm.findById(req.params.id);
+    const farm = await Farm.findById(req.params.id).populate('products', 'name');
     res.render('farms/show', {farm})
 }))
 // update

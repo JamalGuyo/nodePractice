@@ -1,0 +1,31 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-6 text-center">add new product to <br/><span class="text-muted text-sm"><%=farm.name%></span></h1>
+            </div>
+            <div class="card-body">
+                <form action="/farms/<%=farm._id%>/products" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input class="form-control" type="text" id="name" name="product[name]"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="form-label">Price</label>
+                        <input class="form-control" type="price" id="price" name="product[price]"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" name="product[category]">
+                            <% for(let category of categories){ %>
+                                <option value="<%=category%>"><%=category%></option>
+                                <% } %>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary mt-2">add product</button>
+                </form>
+                </div>
+            </div>
+    </div>
+</div>

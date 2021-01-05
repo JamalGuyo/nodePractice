@@ -4,10 +4,10 @@
         <div class="card">
             <div class="card-body">
                 <ul class="list-group">
-                    <% for(farm of farms){ %>
-                        <li class="list-group-item"><a href="farms/<%=farm._id%>"><%= farm.name%></a></li>
-                        <%}%>
-                    </ul>
+                    <% for(let product of products) {%>
+                        <li class="list-group-item"><%=product.name%></li>
+                    <% } %>
+                </ul>
             </div>
         </div>
     </div>

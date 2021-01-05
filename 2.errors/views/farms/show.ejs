@@ -3,6 +3,21 @@
     <div class="card-body">
         <h1 class="card-title"><%= farm.name%></h1>
         <p class="card-text"><%= farm.location%></p>
+        <div>
+            <a href="/farms/<%=farm._id%>/products/new" class="btn btn-sm btn-primary">add product</a>
+        </div>
+        <% if(farm.products && farm.products.length > 0) { %>
+            <h2>products</h2>
+            <ul class="list-group">
+                <% for(let product of farm.products) {%>
+                    <li class="list-group-item"><%=product.name%>
+                    <span class="badge bg-warning rounded-pill"><a href="/farms/<%=farm._id%>/products/<%=product._id%>/edit">edit</a></span>
+                    </li>
+                <% } %>
+            </ul>
+        <%}else{%>
+            <p class="text-muted">No products available</p>
+        <%}%>
     </div>
     <div class="card-footer">
         <a class="btn btn-warning btn-sm" href="/farms/<%=farm._id%>/edit">Edit Farm</a>

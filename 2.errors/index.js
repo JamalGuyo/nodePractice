@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 })
 // imported routes
 app.use('/farms/', farmRoutes);
-app.use('/farms/:id/products/', productRoutes)
+app.use('/farms/:id/products', productRoutes)
 // 404 route
 app.all('*', (req, res) => {
     throw new AppError('Page Not Found', 404);
