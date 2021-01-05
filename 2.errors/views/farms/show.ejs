@@ -4,7 +4,7 @@
         <h1 class="card-title"><%= farm.name%></h1>
         <p class="card-text"><%= farm.location%></p>
         <div>
-            <a href="/farms/<%=farm._id%>/products/new" class="btn btn-sm btn-primary">add product</a>
+            <a href="/farms/<%=farm._id%>/products/new" class="btn btn-sm btn-outline-primary">add product</a>
         </div>
         <% if(farm.products && farm.products.length > 0) { %>
             <h2>products</h2>
@@ -12,6 +12,9 @@
                 <% for(let product of farm.products) {%>
                     <li class="list-group-item"><%=product.name%>
                     <span class="badge bg-warning rounded-pill"><a href="/farms/<%=farm._id%>/products/<%=product._id%>/edit">edit</a></span>
+                    <form class="d-inline-block" action="/farms/<%=farm._id%>/products/<%=product._id%>?_method=DELETE" method="POST">
+                        <button class="badge bg-danger rounded-pill">delete</button>
+                     </form>
                     </li>
                 <% } %>
             </ul>

@@ -29,7 +29,7 @@ router.get('/new', catchAsync(async(req, res) => {
 }))
 router.post('/', validateProduct, catchAsync(async(req, res) => {
     const farm = await Farm.findById(req.params.id);
-    const product = await Product.create(req.body.product);
+    const product = new Product(req.body.product);
     product.farm = farm;
     farm.products.push(product);
     await farm.save();
@@ -40,12 +40,15 @@ router.get('/:productId', (req, res) => {
     res.send('show one product')
 })
 // update
-router.get('/:productId/edit', (req, res) => {
-    res.send('show edit form')
-})
-router.put('/:productId', (req, res) => {
-    res.send('update logic will be handled here')
-})
+router.get('/:productId/edit', catchAsync(async(req, res) => {
+    const farm = await Farm.findById(req.params.id);
+   const product = await Product.findById(req.params.productId);
+   res.render('products/edit', {product, farm, categories}); 
+}))
+router.put('/:productId', validateProduct, catchAsync(async(req, res) => {
+    await Product.findByIdAndUpdate(req.params.productId, req.body.product);
+    res.redirect(`/farms/${req.params.id}/`)
+}))
 // delete
 router.delete('/:productId', (req, res) => {
     res.send('handle delete logic here')
