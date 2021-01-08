@@ -34,6 +34,7 @@ router.post('/', validateProduct, catchAsync(async(req, res) => {
     farm.products.push(product);
     await farm.save();
     await product.save();
+    req.flash('success', 'farm created successfully!')
     res.redirect(`/farms/${farm._id}`)
 }))
 router.get('/:productId', (req, res) => {
@@ -47,12 +48,14 @@ router.get('/:productId/edit', catchAsync(async(req, res) => {
 }))
 router.put('/:productId', validateProduct, catchAsync(async(req, res) => {
     await Product.findByIdAndUpdate(req.params.productId, req.body.product);
+    req.flash('success', 'farm updated successfully!');
     res.redirect(`/farms/${req.params.id}/`)
 }))
 // delete
 router.delete('/:productId', catchAsync(async(req, res) => {
     await Farm.findByIdAndUpdate(req.params.id, {$pull: {products: req.params.productId}});
     await Product.findByIdAndDelete(req.params.productId);
+    req.flash('success', 'farm deleted successfully')
     res.redirect(`/farms/${req.params.id}`)
 }))
 // export router
