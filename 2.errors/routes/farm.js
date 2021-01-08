@@ -51,7 +51,7 @@ router.put('/:id', validateFarm, catchAsync(async(req, res) => {
 // delete
 router.delete('/:id',catchAsync(async(req, res) => {
     await Farm.findByIdAndDelete(req.params.id);
-    req.flash('farm deleted successfully!');
+    req.flash('success','farm deleted successfully!');
     res.redirect('/farms')
 }))
 // export farm router
