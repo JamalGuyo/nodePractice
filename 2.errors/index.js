@@ -5,7 +5,8 @@ const express = require('express'),
  path = require('path'),
  methodOverride = require('method-override'),
  ejsMate = require('ejs-mate'),
- session = require('express-session');
+ session = require('express-session'),
+ flash = require('connect-flash');
 // routes
 const farmRoutes = require('./routes/farm');
 const productRoutes = require('./routes/product');
@@ -24,6 +25,13 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+// setup flash
+app.use(flash());
+app.use((req, res,next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 // ================================================================================
 // CONFIGURATIONS
 // configure ejsmate
