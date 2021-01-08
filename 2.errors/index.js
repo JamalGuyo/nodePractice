@@ -4,7 +4,8 @@ const express = require('express'),
  mongoose = require('mongoose'),
  path = require('path'),
  methodOverride = require('method-override'),
- ejsMate = require('ejs-mate');
+ ejsMate = require('ejs-mate'),
+ session = require('express-session');
 // routes
 const farmRoutes = require('./routes/farm');
 const productRoutes = require('./routes/product');
@@ -17,6 +18,12 @@ mongoose.connect('mongodb://localhost:27017/demodb', {
 })
 .then(() => console.log('connection to db successful'))
 .catch(e => console.log(e))
+// setup express-session
+app.use(session({
+    secret: 'thisismysecret',
+    resave: false,
+    saveUninitialized: false
+}))
 // ================================================================================
 // CONFIGURATIONS
 // configure ejsmate
