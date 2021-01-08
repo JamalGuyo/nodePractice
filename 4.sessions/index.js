@@ -3,7 +3,9 @@ const express = require('express'),
     session = require('express-session');
 // 
 app.use(session({
-    secret:'thisismysecret'
+    secret:'thisismysecret',
+    resave: false,
+    saveUninitialized: false
 }));
 // routes
 app.get('/', (req, res) => {
