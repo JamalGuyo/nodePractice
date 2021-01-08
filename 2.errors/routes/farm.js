@@ -30,6 +30,7 @@ router.get('/new', (req, res) => {
 router.post('/',validateFarm, catchAsync(async(req, res) => {
    const {farm} = req.body;
    await Farm.create(farm); 
+   req.flash('success', 'farm created successfully!');
    res.redirect('/farms')
 }))
 // show specific farm
@@ -44,11 +45,13 @@ router.get('/:id/edit', catchAsync(async(req, res) => {
 }))
 router.put('/:id', validateFarm, catchAsync(async(req, res) => {
     await Farm.findByIdAndUpdate(req.params.id, req.body.farm);
+    req.flash('success', 'farm updated successfully!');
     res.redirect(`/farms/${req.params.id}`)
 }))
 // delete
 router.delete('/:id',catchAsync(async(req, res) => {
     await Farm.findByIdAndDelete(req.params.id);
+    req.flash('farm deleted successfully!');
     res.redirect('/farms')
 }))
 // export farm router
