@@ -58,9 +58,15 @@ app.post('/login', async(req,res) => {
 // 
 app.get('/secret', (req, res) => {
     if(!req.session.user_id){
-        res.redirect('/login')
+        return res.redirect('/login')
     }
-    res.send('secret page')
+    res.render('secret')
+})
+// 
+app.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    req.session.destroy();
+    res.redirect('/login');
 })
 // serve app
 app.listen(3000, () => console.log('listening on port 3000'));
