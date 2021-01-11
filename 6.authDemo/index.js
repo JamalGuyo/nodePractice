@@ -21,6 +21,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({extended: true}));
 app.use(session({secret: 'thisisnotagoodsecret'}))
+const requireLogin = (req,res,next) => {
+    if(!req.session.user_id){
+        return res.redirect('/login')
+    }
+    next();
+}
 // routes
 app.get('/', (req, res) => {
     res.send('home page')
@@ -56,10 +62,7 @@ app.post('/login', async(req,res) => {
     }
 })
 // 
-app.get('/secret', (req, res) => {
-    if(!req.session.user_id){
-        return res.redirect('/login')
-    }
+app.get('/secret',requireLogin, (req, res) => {
     res.render('secret')
 })
 // 
