@@ -20,7 +20,11 @@ mongoose.connect('mongodb://localhost:27017/authdemo', {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({extended: true}));
-app.use(session({secret: 'thisisnotagoodsecret'}))
+app.use(session({
+    secret: 'thisisnotagoodsecret',
+    resave: false,
+    saveUninitialized: true
+}))
 const requireLogin = (req,res,next) => {
     if(!req.session.user_id){
         return res.redirect('/login')
