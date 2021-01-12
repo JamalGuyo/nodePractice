@@ -4,15 +4,18 @@
       Home
     </a>
     <div class="right menu">
-        <a class="item" href="/register">
-            register
-        </a>
-        <a class="item" href="/login">
-            login 
-        </a>
-        <a href="/logout" class="item">
-            logout
-        </a>
+        <% if(!currentUser){%>
+          <a class="item" href="/register">
+              register
+          </a>
+          <a class="item" href="/login">
+              login 
+          </a>
+        <%}else{%>
+          <form action="/logout" method="GET">
+              <button class="item">logout</button>
+          </form>
+        <%}%>
     </div>
   </div>
 </div>
