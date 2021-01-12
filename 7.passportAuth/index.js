@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+// register
+app.get('/register', (req, res) => {
+    res.render('users/register');
+})
+
 app.get('/secret', (req, res) => {
     res.render('secret')
 })
