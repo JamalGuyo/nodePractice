@@ -36,6 +36,13 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+// 
+const isLoggedIn = (req, res, next) => {
+    if(!req.isAuthenticated()){
+        return res.redirect('/login')
+    }
+    next();
+}
 // routes
 app.get('/', (req, res) => {
     res.render('index');
@@ -57,7 +64,10 @@ app.post('/register', async(req, res, next) => {
 app.get('/login', (req, res) => {
     res.render('users/login');
 })
-app.get('/secret', (req, res) => {
+app.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), (req, res) => {
+    res.redirect('/')
+})
+app.get('/secret',isLoggedIn, (req, res) => {
     res.render('secret')
 })
 // listener
