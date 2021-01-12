@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/passportdemo', {
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({extended: true}))
 // auth configs
 app.use(session({
     secret: 'thisisnotagoodsecret',
@@ -43,6 +44,14 @@ app.get('/', (req, res) => {
 // register
 app.get('/register', (req, res) => {
     res.render('users/register');
+})
+app.post('/register', async(req, res, next) => {
+    const {username, email} = req.body;
+    const user = await User.register(new User({username, email}), req.body.password);
+    req.login(user, err => {
+        if(err) return next(err);
+        res.redirect('/');
+    })
 })
 // login
 app.get('/login', (req, res) => {
