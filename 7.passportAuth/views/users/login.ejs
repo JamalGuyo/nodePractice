@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate') %>
+<h1>LOGIN</h1>
+<div class="ui segment">
+    <form action="/login" method="POST" class="ui form">
+        <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"> 
+        </div>
+        <button class="ui blue button" type="submit">Submit</button>
+    </form>
+</div>

@@ -16,7 +16,10 @@ app.get('/', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('users/register');
 })
-
+// login
+app.get('/login', (req, res) => {
+    res.render('users/login');
+})
 app.get('/secret', (req, res) => {
     res.render('secret')
 })
