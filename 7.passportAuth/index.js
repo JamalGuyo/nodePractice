@@ -1,8 +1,18 @@
 const express = require('express'),
     app = express(),
     path = require('path'),
+    mongoose = require('mongoose'),
     // ejsmate
     ejsMate = require('ejs-mate');
+// connect to db
+mongoose.connect('mongodb://localhost:27017/passportdemo', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+})
+.then(() => console.log('connection to passportdemo db successful'))
+.catch(e => console.log(e));
 // configure ejs
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
